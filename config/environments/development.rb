@@ -1,5 +1,9 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
+  
+  config.read_encrypted_secrets = true
+  RSpotify::authenticate(Rails.application.secrets.spotify_client_id,
+                         Rails.application.secrets.spotify_client_secret)
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
