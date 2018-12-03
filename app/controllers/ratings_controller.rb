@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   before_action :set_user
-  before_action :set_rating, only: [:edit, :update, :destroy]
+  before_action :set_rating, except: [:create]
 
   # GET /ratings/1/edit
   def edit

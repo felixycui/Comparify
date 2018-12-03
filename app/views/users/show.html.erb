@@ -1,9 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Username:</strong>
+<h2>
   <%= @user.username %>
-</p>
+</h2>
 
 <table class="table table-striped">
   <h3>Ratings:</h3>
@@ -14,6 +13,14 @@
     </tr>
   </thead>
   <tbody>
+
+    <% if !@user.ratings.empty?%>
+      <tr>
+        <% arr = @user.ratings.map(&:value) %>
+        <td> Average: <%= arr.inject{ |sum, el| sum + el }.to_f / arr.size %></td>
+      </tr>
+    <% end %>
+
     <% @user.ratings.each do |rating| %>
       <tr>
         <td><%= rating.value %></td>
@@ -26,10 +33,12 @@
   </tbody>
 </table>
 
-<h4>Add a rating:</h4>
-<%= form_with url: "/users/#{@user.id}/ratings" do |form| %>
-  <%= form.number_field 'rating[value]' %><br>
-  <%= form.submit 'Add Rating' %>
+<% if current_user != @user %>
+  <h4>Add a rating:</h4>
+  <%= form_with url: "/users/#{@user.id}/ratings" do |form| %>
+    <%= form.number_field 'rating[value]' %><br>
+    <%= form.submit 'Add Rating' %>
+  <% end %>
 <% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
