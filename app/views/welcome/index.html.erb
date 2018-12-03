@@ -1,0 +1,16 @@
+<% if logged_in? %>
+<div>
+  <ul>
+    <% current_user.tracks.each do |track| %>
+      <li> <%= link_to "#{track.name} - #{track.artist}", "/tracks/#{track.id}" %> </li>
+    <% end %>
+  </ul>
+</div>
+<% else %>
+  <div class="row">
+    <div class="col-lg-6 offset-lg-3">
+      <h1>Welcome to Comparify!</h1>
+      <p>Sign up or log in to get started!</p>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,15 @@
+<h1> Log In </h1>
+
+<%= form_with url: login_path do |form| %>
+  <div class="form-group">
+    <%= form.label :username %>
+    <%= form.text_field :username, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :password_hash %>
+    <%= form.password_field :password_hash, class: 'form-control' %>
+  </div>
+
+  <%= button_tag 'Log in', class: 'btn btn-primary' %>
+<% end %>

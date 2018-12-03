@@ -4,6 +4,16 @@
   <strong>Name:</strong>
   <%= @track.name %>
 </p>
+<p>
+  <strong>Users:</strong>
+  <ul>
+    <% User.all.each do |user| %>
+      <% if !(user.tracks.find_by name: @track.name, artist: @track.artist).nil? %>
+        <li><%= link_to "#{user.username}", "/users/#{user.id}" %></li>
+      <% end %>
+    <% end %>
+  </ul>
+</p>
 
 <%= link_to 'Edit', edit_track_path(@track) %> |
 <%= link_to 'Back', tracks_path %>

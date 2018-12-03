@@ -5,10 +5,32 @@
   <%= @user.username %>
 </p>
 
-<p>
-  <strong>Password hash:</strong>
-  <%= @user.password_hash %>
-</p>
+<table class="table table-striped">
+  <h3>Ratings:</h3>
+  <thead>
+    <tr>
+      <th scope="col">Value</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @user.ratings.each do |rating| %>
+      <tr>
+        <td><%= rating.value %></td>
+        <td>
+          <%= link_to 'Edit', "/users/#{@user.id}/ratings/#{rating.id}/edit" %>
+          <%= link_to 'Destroy', "/users/#{@user.id}/ratings/#{rating.id}", method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h4>Add a rating:</h4>
+<%= form_with url: "/users/#{@user.id}/ratings" do |form| %>
+  <%= form.number_field 'rating[value]' %><br>
+  <%= form.submit 'Add Rating' %>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

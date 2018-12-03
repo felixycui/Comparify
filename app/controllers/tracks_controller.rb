@@ -10,6 +10,7 @@ class TracksController < ApplicationController
   # GET /tracks/1
   # GET /tracks/1.json
   def show
+    @users = User.all
   end
 
   # GET /tracks/new
@@ -61,14 +62,27 @@ class TracksController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_track
-      @track = Track.find(params[:id])
-    end
+  def add_user
+    user = User.find(params[:user_id]) if params[:user_id].present?
+    @track.users << user if (!@track.users.include? user) && user.present?
+    redirect_to "/tracks/#{@track.id}"
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def track_params
-      params.require(:track).permit(:name)
-    end
+  def delete_user
+    user = User.find(params[:user_id])
+    @track.users.delete(user)
+    redirect_to "/tracks/#{@track.id}"
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_track
+    @track = Track.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def track_params
+    params.require(:track).permit(:name)
+  end
 end

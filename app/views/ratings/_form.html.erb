@@ -1,4 +1,4 @@
-<%= form_with(model: rating, local: true) do |form| %>
+<%= form_with model: [user, rating] do |form| %>
   <% if rating.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(rating.errors.count, "error") %> prohibited this rating from being saved:</h2>
@@ -14,16 +14,6 @@
   <div class="field">
     <%= form.label :value %>
     <%= form.number_field :value, id: :rating_value %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id, id: :rating_user_id %>
-  </div>
-
-  <div class="field">
-    <%= form.label :track_id %>
-    <%= form.text_field :track_id, id: :rating_track_id %>
   </div>
 
   <div class="actions">
