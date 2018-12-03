@@ -41,5 +41,12 @@
   <% end %>
 <% end %>
 
+<h4>Songs</h4>
+<ul>
+  <% @user.tracks.each do |track| %>
+    <li> <%= link_to "#{track.name} - #{track.artist}", "/tracks/#{track.id}" %> </li>
+  <% end %>
+</ul>
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

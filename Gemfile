@@ -60,3 +60,5 @@ gem "rspotify", "~> 2.3"
 gem "bcrypt", "~> 3.1"
 
 gem "bootstrap", "~> 4.1"
+
+gem 'activerecord-reset-pk-sequence'

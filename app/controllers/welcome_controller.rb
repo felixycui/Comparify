@@ -5,7 +5,7 @@ class WelcomeController < ApplicationController
       current_user.all_tracks_array.each do |track|
         current_user.tracks << Track.create(name: track.name, artist: track.artists.first.name)
       end
-      #current_user.tracks = current_user.all_tracks_array
+      # current_user.tracks = current_user.all_tracks_array
     end
   end
 end

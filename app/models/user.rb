@@ -22,7 +22,7 @@ class User < ApplicationRecord
     arr = []
     user_find.playlists.each do |playlist|
       playlist.tracks.each do |track|
-        next if !track.artists.first.name.present?
+        next unless track.artists.first.name.present?
         arr << track
       end
     end
@@ -30,11 +30,23 @@ class User < ApplicationRecord
   end
 
   def similarity_score(user)
-    (all_tracks_array & user.all_tracks_array).length
+    (all_tracks_array.map(&:name) & user.all_tracks_array.map(&:name)).length
   end
 
   def similar_tracks_array(user)
     all_tracks_array & user.all_tracks_array
+  end
+
+  def rank_hash
+    hash = {}
+    User.all.each do |user|
+      next if self == user
+      next if user.user_find.nil?
+      name = user.username
+      hash[name] = similarity_score(user)
+    end
+
+    hash.sort_by { |name, score| -score }
   end
 
   def password

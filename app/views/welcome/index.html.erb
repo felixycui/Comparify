@@ -1,8 +1,9 @@
 <% if logged_in? %>
 <div>
+  <h3>Ranking</h3>
   <ul>
-    <% current_user.tracks.each do |track| %>
-      <li> <%= link_to "#{track.name} - #{track.artist}", "/tracks/#{track.id}" %> </li>
+    <% current_user.rank_hash.each do |name, score| %>
+      <li><%= "#{name} - #{score}" %></li>
     <% end %>
   </ul>
 </div>
