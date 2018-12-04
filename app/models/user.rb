@@ -45,8 +45,15 @@ class User < ApplicationRecord
       name = user.username
       hash[name] = similarity_score(user)
     end
-
     hash.sort_by { |name, score| -score }
+  end
+
+  def set_percentage
+    percentage = 0
+    all_tracks_array.each do |track|
+      percentage += track.popularity
+    end
+    self.percent = percentage / all_tracks_array.length
   end
 
   def password
