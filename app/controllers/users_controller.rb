@@ -29,6 +29,9 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     @user.set_percentage
+    @user.all_tracks_array.each do |track|
+      @user.tracks << Track.create(name: track.name, artist: track.artists.first.name)
+    end
 
     if @user.save
       session[:user_id] = @user.id
