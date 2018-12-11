@@ -2,6 +2,7 @@ require 'bcrypt'
 
 class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
+  validates :name, presence: true
   validate :present_in_api
   has_many :ratings, dependent: :destroy
   has_many :tracks_users, dependent: :destroy
@@ -30,7 +31,7 @@ class User < ApplicationRecord
   end
 
   def similarity_score(user)
-    (all_tracks_array.map(&:name) & user.all_tracks_array.map(&:name)).length
+    '%.2f' % ((all_tracks_array.map(&:name) & user.all_tracks_array.map(&:name)).length * 100.0 / self.tracks.length)
   end
 
   def similar_tracks_array(user)
@@ -42,10 +43,9 @@ class User < ApplicationRecord
     User.all.each do |user|
       next if self == user
       next if user.user_find.nil?
-      name = user.username
-      hash[name] = similarity_score(user)
+      hash[user] = similarity_score(user)
     end
-    hash.sort_by { |name, score| -score }
+    hash.sort_by { |user, score| -score }
   end
 
   def set_percentage

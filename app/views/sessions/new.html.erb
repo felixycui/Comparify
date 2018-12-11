@@ -1,4 +1,5 @@
-<h1> Log In </h1>
+<h2> Login </h2>
+<p>Please log in with your Spotify ID as your username.</p>
 
 <%= form_with url: login_path do |form| %>
   <div class="form-group">
@@ -6,10 +7,12 @@
     <%= form.text_field :username, class: 'form-control' %>
   </div>
 
+
   <div class="form-group">
-    <%= form.label :password_hash %>
+    <%= form.label :password %>
     <%= form.password_field :password_hash, class: 'form-control' %>
   </div>
 
-  <%= button_tag 'Log in', class: 'btn btn-primary' %>
+  <p>(If you don't know your Spotify ID, go to your profile, the share option, and get the last string in the Spotify URI!)</p>
+  <%= button_tag 'Log in', class: 'btn btn-primary bg-dark' %>
 <% end %>

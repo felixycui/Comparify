@@ -11,15 +11,23 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :username %>
-    <%= form.text_field :username, id: :username %>
+  <div class="form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :name, class: 'form-control' %>
   </div>
 
-  <div class="field">
-    <%= form.label :password_hash %>
-    <%= form.text_field :password_hash, id: :password_hash %>
+  <div class="form-group">
+    <%= form.label :username %>
+    <%= form.text_field :username, id: :username, class: 'form-control' %>
   </div>
+
+  <div class="form-group">
+    <%= form.label :password %>
+    <%= form.text_field :password_hash, id: :password_hash, class: 'form-control' %>
+  </div>
+
+
+  <p>(If you don't know your Spotify ID, go to your profile, the share option, and get the last string in the Spotify URI!)</p>
 
   <div class="actions">
     <%= form.submit %>

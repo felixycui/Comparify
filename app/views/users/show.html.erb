@@ -1,6 +1,10 @@
 <p id="notice"><%= notice %></p>
 
-<h1><%= @user.username %></h1>
+<% if @user.name.nil? %>
+  <h1><%= " (" + @user.username + ") " %></h1>
+<% else %>
+  <h1><%= @user.name + " (" + @user.username + ") " %></h1>
+<% end %>
 
 <h2>Mainstream Rating: <%= @user.percent %>%</h2>
 
@@ -17,7 +21,7 @@
     <% if !@user.ratings.empty?%>
       <tr>
         <% arr = @user.ratings.map(&:value) %>
-        <td> Average: <%= arr.inject{ |sum, el| sum + el }.to_f / arr.size %></td>
+        <td> Average: <%= '%.2f' % (arr.inject{ |sum, el| sum + el }.to_f / arr.size) %></td>
       </tr>
     <% end %>
 
