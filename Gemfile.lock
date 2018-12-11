@@ -127,6 +127,7 @@ GEM
     omniauth-oauth2 (1.3.1)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    pg (1.1.3)
     popper_js (1.14.5)
     public_suffix (3.0.3)
     puma (3.12.0)
@@ -233,6 +234,7 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails (= 4.3.1)
   listen (>= 3.0.5, < 3.2)
+  pg
   puma (~> 3.7)
   rails (~> 5.1.4)
   rspotify (~> 2.3)
@@ -245,6 +247,9 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+
+RUBY VERSION
+   ruby 2.5.1p57
 
 BUNDLED WITH
    1.16.5
