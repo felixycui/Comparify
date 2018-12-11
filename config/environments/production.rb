@@ -1,6 +1,10 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  config.read_encrypted_secrets = true
+  RSpotify::authenticate(Rails.application.secrets.spotify_client_id,
+                         Rails.application.secrets.spotify_client_secret)
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
